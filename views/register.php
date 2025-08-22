@@ -15,7 +15,8 @@ $success_message = "";
 $error_message = "";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    require_once 'config/database.php';
+    // require_once '/../config/database.php';
+    require_once __DIR__ . '/../config/database.php';
 
     $db = new Database();
     $conn = $db->connect();
@@ -54,20 +55,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro</title>
-    <link rel="stylesheet" href="public/css/style.css">
+    <link rel="stylesheet" href="../public/css/style.css">
 </head>
 <body>
-    <div style="max-width: 400px; margin: 50px auto;">
+    <div class="container container-small">
         <h2>Registro de usuario</h2>
         
         <?php if (!empty($success_message)): ?>
-            <div style="color: green; margin-bottom: 15px; padding: 10px; background: #d4edda; border-radius: 5px;">
+            <div>
                 <?= htmlspecialchars($success_message) ?>
             </div>
         <?php endif; ?>
         
         <?php if (!empty($error_message)): ?>
-            <div style="color: red; margin-bottom: 15px; padding: 10px; background: #f8d7da; border-radius: 5px;">
+            <div >
                 <?= htmlspecialchars($error_message) ?>
             </div>
         <?php endif; ?>
@@ -80,8 +81,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </form>
         <?php endif; ?>
         
-        <p style="margin-top: 20px; text-align: center;">
-            ¿Ya tienes cuenta? <a href="index.php">Iniciar Sesión</a>
+        <p >
+            ¿Ya tienes cuenta? <a href="../index.php">Iniciar Sesión</a>
         </p>
     </div>
 </body>

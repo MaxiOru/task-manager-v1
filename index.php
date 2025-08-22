@@ -38,11 +38,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="public/css/style.css">
 </head>
 <body>
-    <div style="max-width: 400px; margin: 50px auto;">
+    <div class="container container-small" >
         <h2>Iniciar Sesión</h2>
         
         <?php if (!empty($error_message)): ?>
-            <div style="color: red; margin-bottom: 15px;">
+            <div >
                 <?= htmlspecialchars($error_message) ?>
             </div>
         <?php endif; ?>
@@ -53,8 +53,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <button type="submit">Iniciar Sesión</button>
         </form>
         
-        <p style="margin-top: 20px; text-align: center;">
-            ¿No tienes cuenta? <a href="register.php">Registrarse</a>
+        <p >
+            ¿No tienes cuenta? <a href="views/register.php">Registrarse</a>
         </p>
     </div>
 </body>
