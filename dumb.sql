@@ -26,11 +26,13 @@ USE `task_manager_v1`;
 --
 
 CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `username` varchar(50) NOT NULL,
   `password` varchar(255) NOT NULL,
   `role` enum('jefe','normal') NOT NULL DEFAULT 'normal',
-  `approved` tinyint(1) NOT NULL DEFAULT 0
+  `approved` tinyint(1) NOT NULL DEFAULT 0,
+  `rejected` tinyint(1) DEFAULT 0,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -38,9 +40,9 @@ CREATE TABLE `users` (
 -- Contraseña para ambos usuarios: "password"
 --
 
-INSERT INTO `users` (`id`, `username`, `password`, `role`, `approved`) VALUES
-(1, 'admin', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'jefe', 1),
-(2, 'usuario_demo', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'normal', 1);
+INSERT INTO `users` (`id`, `username`, `password`, `role`, `approved`, `rejected`, `created_at`) VALUES
+(1, 'admin', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'jefe', 1, 0, NOW()),
+(2, 'usuario_demo', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'normal', 1, 0, NOW());
 
 -- --------------------------------------------------------
 
@@ -49,8 +51,8 @@ INSERT INTO `users` (`id`, `username`, `password`, `role`, `approved`) VALUES
 --
 
 CREATE TABLE `tasks` (
-  `id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
+  `id` int NOT NULL,
+  `user_id` int NOT NULL,
   `title` varchar(100) NOT NULL,
   `description` text DEFAULT NULL,
   `status` enum('pendiente','en progreso','completada') NOT NULL DEFAULT 'pendiente',
@@ -95,13 +97,13 @@ ALTER TABLE `tasks`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `tasks`
 --
 ALTER TABLE `tasks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Restricciones para tablas volcadas

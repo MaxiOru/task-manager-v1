@@ -28,6 +28,7 @@ task-manager_v1/
 ├── logout.php               # Cerrar sesión
 ├── register.php             # Registro de usuarios
 ├── approve_user.php         # Aprobación de usuarios
+├── reject_user.php          # Rechazo de usuarios
 ├── config/
 │   └── database.php         # Configuración de base de datos
 ├── controllers/
@@ -138,18 +139,6 @@ El sistema incluye usuarios de demostración ya configurados:
 - ✅ Modelos para acceso a datos
 - ✅ Vistas para presentación
 
-## 🚀 Funcionalidades adicionales implementadas
-
-- ✅ **Sistema de aprobación** de usuarios por el jefe
-- ✅ **Roles diferenciados** (jefe/usuario normal)
-- ✅ **Modelos MVC** para mejor organización del código
-- ✅ **Validación completa** de formularios
-- ✅ **Mensajes de error y éxito** informativos
-- ✅ **Navegación intuitiva** entre páginas
-- ✅ **Fechas de vencimiento** con validación
-- ✅ **Estados múltiples** de tareas
-- ✅ **Interfaz limpia** y responsive
-
 ## 📊 Base de datos
 
 ### Tabla `users`
@@ -180,33 +169,3 @@ El sistema incluye usuarios de demostración ya configurados:
 3. **Index** → Usuario inicia sesión
 4. **Dashboard** → Se redirige según rol (jefe/usuario)
 5. **Gestión** → Crear/actualizar tareas o aprobar usuarios
-
-## 🚨 Solución de problemas comunes
-
-### Error de conexión a la base de datos
-- Verificar que XAMPP esté ejecutando Apache y MySQL
-- Revisar credenciales en `config/database.php`
-- Asegurarse de que la base de datos `task_manager_v1` exista
-
-### Página en blanco o errores PHP
-- Revisar logs de error en `C:/xampp/apache/logs/error.log`
-- Verificar que la versión de PHP sea compatible
-- Asegurar que todos los archivos estén en la ruta correcta
-
-### Problemas de autenticación
-- Verificar que las contraseñas sean exactamente: `password`
-- Limpiar cookies y caché del navegador
-- Revisar que los usuarios estén aprobados (approved = 1)
-
-## 📄 Licencia
-
-Este proyecto está desarrollado como tarea técnica para evaluación de habilidades en desarrollo web con PHP.
-
-## 👨‍💻 Información técnica
-
-- **Desarrollado**: Como prueba técnica para puesto de desarrollador
-- **Tiempo de desarrollo**: Proyecto académico/profesional
-- **Nivel**: Intermedio - enfocado en buenas prácticas y funcionalidad
-- **Compatibilidad**: XAMPP, Apache, MySQL, PHP 7.4+
-
----
