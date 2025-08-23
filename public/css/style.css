@@ -26,15 +26,15 @@ a:hover {
 
 /* ===== CONTENEDORES ===== */
 .container {
-    max-width: 900px; /* Más ancho para que entren varias tarjetas */
+    max-width: 900px;
     margin: 40px auto;
     background: #fff;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0,0,0,0.08);
     padding: 30px;
-    /* Elimina align-items: center; */
     display: flex;
     flex-direction: column;
+    align-items: center; /* Centra el contenido interno */
 }
 
 .container form,
@@ -42,8 +42,6 @@ a:hover {
 .container h3 {
     width: 100%;
     max-width: 500px;
-    margin-left: auto;
-    margin-right: auto;
 }
 .container-small {
     max-width: 400px;
@@ -117,19 +115,45 @@ button:hover {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
-    justify-content: flex-start; /* Alinea las tarjetas a la izquierda */
+    justify-content: center; /* Centra las tarjetas */
 }
 
 .card {
     border: 1px solid #c3e6cb;
     padding: 16px;
-    margin-bottom: 10px;
     border-radius: 8px;
     background-color: #e9fbe5;
     min-width: 250px;
     max-width: 300px;
     flex: 1 1 250px;
     box-shadow: 0 2px 4px rgba(33,136,56,0.08);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 260px; /* Ajusta según lo que necesites */
+}
+.card-title {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.card-desc {
+    margin-bottom: 10px;
+    color: #333;
+    font-size: 0.98em;
+}
+
+.card-date {
+    margin-bottom: 15px;
+    color: #218838;
+    font-size: 0.95em;
+}
+
+.card-form {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 ul {
     list-style: none;

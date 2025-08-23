@@ -80,25 +80,27 @@ $tasks = $taskController->getTasksByUser($_SESSION['user_id']);
 
         <h3>Tareas existentes</h3>
         <?php if (count($tasks) > 0): ?>
-            <div class="task-list">
-                <?php foreach ($tasks as $task): ?>
-                    <div class="card">
-                        <strong><?= htmlspecialchars($task['title']) ?></strong><br>
-                        <?= htmlspecialchars($task['description']) ?><br>
-                        Estado: <?= $task['status'] ?><br>
-                        Vence: <?= $task['due_date'] ?><br>
-                        <form method="POST">
-                            <input type="hidden" name="task_id" value="<?= $task['id'] ?>">
-                            <select name="status">
-                                <option value="pendiente" <?= $task['status'] === 'pendiente' ? 'selected' : '' ?>>Pendiente</option>
-                                <option value="en progreso" <?= $task['status'] === 'en progreso' ? 'selected' : '' ?>>En progreso</option>
-                                <option value="completada" <?= $task['status'] === 'completada' ? 'selected' : '' ?>>Completada</option>
-                            </select>
-                            <button type="submit" name="update_status">Actualizar</button>
-                        </form>
+        <div class="task-list">
+            <?php foreach ($tasks as $task): ?>
+                <div class="card">
+                    <div>
+                        <div class="card-title"><?= htmlspecialchars($task['title']) ?></div>
+                        <div class="card-desc"><?= htmlspecialchars($task['description']) ?></div>
+                        <div class="card-date">Vence: <?= $task['due_date'] ?></div>
+                        <div>Estado: <?= $task['status'] ?></div>
                     </div>
-                <?php endforeach; ?>
-            </div>
+                    <form method="POST" class="card-form">
+                        <input type="hidden" name="task_id" value="<?= $task['id'] ?>">
+                        <select name="status">
+                            <option value="pendiente" <?= $task['status'] === 'pendiente' ? 'selected' : '' ?>>Pendiente</option>
+                            <option value="en progreso" <?= $task['status'] === 'en progreso' ? 'selected' : '' ?>>En progreso</option>
+                            <option value="completada" <?= $task['status'] === 'completada' ? 'selected' : '' ?>>Completada</option>
+                        </select>
+                        <button type="submit" name="update_status">Actualizar</button>
+                    </form>
+                </div>
+            <?php endforeach; ?>
+        </div>
         <?php else: ?>
             <p>No tenés tareas registradas aún.</p>
         <?php endif; ?>
