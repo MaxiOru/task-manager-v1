@@ -58,7 +58,7 @@ CREATE TABLE `tasks` (
   `status` enum('pendiente','en progreso','completada') NOT NULL DEFAULT 'pendiente',
   `due_date` date NOT NULL,
   `approved` tinyint(1) NOT NULL DEFAULT 0,
-  `assigned_to` int(11) DEFAULT NULL
+  `assigned_to` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --

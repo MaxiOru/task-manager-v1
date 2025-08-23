@@ -149,6 +149,8 @@ El sistema incluye usuarios de demostración ya configurados:
 | password | varchar(255) | Contraseña hasheada |
 | role | enum('jefe','normal') | Rol del usuario |
 | approved | tinyint(1) | Estado de aprobación |
+| rejected | tinyint(1) | Estado de rechazo |
+| created_at | tinyint(1) | Fecha de registro |
 
 ### Tabla `tasks`
 | Campo | Tipo | Descripción |
@@ -160,7 +162,7 @@ El sistema incluye usuarios de demostración ya configurados:
 | status | enum(...) | Estado de la tarea |
 | due_date | date | Fecha de vencimiento |
 | approved | tinyint(1) | Aprobación futura |
-| assigned_to | int(11) | Asignación futura (FK) |
+| assigned_to | int | Asignación futura (FK) |
 
 ## 🔄 Flujo de la aplicación
 
