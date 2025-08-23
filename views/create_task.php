@@ -47,65 +47,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crear Nueva Tarea</title>
     <link rel="stylesheet" href="../public/css/style.css">
-    <!-- <style>
-        .container {
-            max-width: 600px;
-            margin: 50px auto;
-            background: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        .nav {
-            margin-bottom: 30px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #eee;
-        }
-        .nav a {
-            text-decoration: none;
-            margin-right: 15px;
-            color: #007BFF;
-        }
-        .nav a:hover {
-            text-decoration: underline;
-        }
-        .message {
-            padding: 12px;
-            margin-bottom: 20px;
-            border-radius: 5px;
-        }
-        .success {
-            background-color: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-        .error {
-            background-color: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-        form input, form textarea, form button {
-            width: 100%;
-            margin-bottom: 15px;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-        form textarea {
-            resize: vertical;
-            height: 100px;
-        }
-        form label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-            color: #333;
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-    </style> -->
 </head>
 <body>
     <div class="container">
@@ -159,7 +100,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <button type="submit">Crear Tarea</button>
         </form>
 
-        <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee; text-align: center;">
+        <div>
             <p>¿Ya terminaste? <a href="dashboard_usuario.php">Ver todas mis tareas</a></p>
         </div>
     </div>

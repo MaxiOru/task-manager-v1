@@ -49,77 +49,7 @@ foreach ($allTasks as $task) {
     <meta charset="UTF-8">
     <title>Panel del Jefe - Administración</title>
     <link rel="stylesheet" href="../public/css/style.css">
-    <!-- <style>
-        /* ===== ESTILOS BASE ===== */
-        body { 
-            font-family: Arial, sans-serif; 
-            margin: 20px; 
-            background: #f8f9fa;
-            color: #333;
-        }
-        .container { max-width: 1200px; margin: 0 auto; }
-        h2, h3 { margin-top: 40px; }
 
-        /* ===== UTILIDADES ===== */
-        .card, .section, .nav, table {
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        .center { text-align: center; }
-        .bold { font-weight: bold; }
-
-        /* ===== NAV ===== */
-        .nav { padding: 15px; margin-bottom: 20px; }
-        .nav a {
-            text-decoration: none;
-            margin-right: 15px;
-            color: #007BFF;
-            font-weight: bold;
-        }
-        .nav a:hover { text-decoration: underline; }
-
-        /* ===== ESTADÍSTICAS ===== */
-        .stats {
-            display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 30px;
-        }
-        .stat-card { flex: 1; min-width: 150px; padding: 20px; }
-        .stat-number { font-size: 2em; font-weight: bold; color: #007BFF; }
-        .stat-label { color: #666; text-transform: uppercase; font-size: 0.9em; }
-
-        /* ===== TABLAS ===== */
-        table { width: 100%; border-collapse: collapse; margin-top: 10px; overflow: hidden; }
-        th, td { padding: 12px; border: 1px solid #ddd; text-align: left; }
-        th { background: #007BFF; color: #fff; }
-        tr:nth-child(even) { background: #f8f9fa; }
-        tr:hover { background: #e3f2fd; }
-
-        /* ===== ESTADOS ===== */
-        .status { padding: 4px 12px; border-radius: 15px; font-size: 0.85em; font-weight: bold; }
-        .status-pendiente { background: #fff3cd; color: #856404; }
-        .status-progreso { background: #cce5ff; color: #004085; }
-        .status-completada { background: #d4edda; color: #155724; }
-
-        /* ===== FECHAS ===== */
-        .date-overdue { color: #dc3545; font-weight: bold; }
-        .date-today   { color: #fd7e14; font-weight: bold; }
-        .date-future  { color: #28a745; }
-
-        /* ===== BOTONES ===== */
-        button { 
-            padding: 8px 16px; border: none; border-radius: 4px;
-            background: #28a745; color: #fff; cursor: pointer;
-        }
-        button:hover { background: #218838; }
-
-        /* ===== MENSAJES Y SECCIONES ===== */
-        .mensaje { 
-            color: green; margin-top: 10px; padding: 10px;
-            background: #d4edda; border-radius: 4px;
-        }
-        .section { padding: 20px; margin-bottom: 30px; }
-
-    </style> -->
 </head>
 <body>
     <div class="container">
@@ -239,7 +169,7 @@ foreach ($allTasks as $task) {
                     <?php foreach ($aprobados as $user): ?>
                         <li>
                             <strong><?= htmlspecialchars($user['username']) ?></strong>
-                            <span class="status status-completada" style="margin-left: 10px;">● Activo</span>
+                            <span class="status status-completada">● Activo</span>
                         </li>
                     <?php endforeach; ?>
                 </ul>

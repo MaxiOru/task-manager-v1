@@ -30,27 +30,7 @@ $tasks = $taskController->getTasksByUser($_SESSION['user_id']);
     <meta charset="UTF-8">
     <title>Mis tareas</title>
     <link rel="stylesheet" href="../public/css/style.css">
-    <!-- <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        h2, h3 { margin-top: 30px; }
-        .card {
-            border: 1px solid #ccc;
-            padding: 12px;
-            margin-bottom: 10px;
-            border-radius: 6px;
-            background-color: #f9f9f9;
-        }
-        form input, form textarea, form select, form button {
-            margin-top: 6px;
-            margin-bottom: 10px;
-            display: block;
-            width: 100%;
-            max-width: 400px;
-        }
-        .nav {
-            margin-bottom: 20px;
-        }
-    </style> -->
+
 </head>
 <body>
     <div class="container">
