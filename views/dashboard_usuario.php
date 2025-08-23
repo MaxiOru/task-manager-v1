@@ -3,7 +3,7 @@ session_start();
 
 // 🔒 Verificación de sesión y rol
 if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'normal') {
-    header("Location: login.php");
+    header("Location: ../index.php");
     exit;
 }
 
@@ -16,7 +16,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $taskController->createTask($_SESSION['user_id'], $_POST['title'], $_POST['description'], $_POST['due_date']);
     }
     if (isset($_POST['update_status'])) {
-        $taskController->updateStatus($_POST['task_id'], $_POST['status']);
+        // 🔐 ÚNICO CAMBIO: Agregar validación de usuario
+        $taskController->updateStatus($_POST['task_id'], $_POST['status'], $_SESSION['user_id']);
     }
 }
 

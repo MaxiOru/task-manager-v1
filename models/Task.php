@@ -43,30 +43,11 @@ class Task {
         ]);
     }
 
-    // Obtener tarea por ID
+    // Obtener tarea por ID (necesario para validación)
     public function getById($task_id) {
         $stmt = $this->conn->prepare("SELECT * FROM {$this->table} WHERE id = :id");
         $stmt->execute(['id' => $task_id]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
-
-    // Obtener todas las tareas (para el jefe)
-    public function getAll() {
-        $stmt = $this->conn->prepare("SELECT t.*, u.username FROM {$this->table} t LEFT JOIN users u ON t.user_id = u.id ORDER BY t.due_date ASC");
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
-
-    // Obtener tareas por estado
-    public function getByStatus($status) {
-        $stmt = $this->conn->prepare("SELECT t.*, u.username FROM {$this->table} t LEFT JOIN users u ON t.user_id = u.id WHERE t.status = :status ORDER BY t.due_date ASC");
-        $stmt->execute(['status' => $status]);
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
-
-    // Eliminar tarea
-    public function delete($task_id) {
-        $stmt = $this->conn->prepare("DELETE FROM {$this->table} WHERE id = :id");
-        return $stmt->execute(['id' => $task_id]);
-    }
 }
+?>

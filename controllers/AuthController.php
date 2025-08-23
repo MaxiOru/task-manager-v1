@@ -1,8 +1,7 @@
 <?php
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
-};
-// require_once '../config/database.php';
+}
 require_once __DIR__ . '/../config/database.php';
 
 class AuthController {
@@ -26,13 +25,14 @@ class AuthController {
 
             // Guardar datos en sesión
             $_SESSION['user_id'] = $user['id'];
-            $_SESSION['user_role'] = $user['role']; // 👈 importante para saber el rol
+            $_SESSION['user_role'] = $user['role'];
             $_SESSION['username'] = $user['username'];
+            
             // Redirigir según el rol
             if ($user['role'] === 'jefe') {
-                header("Location: views/dashboard_jefe.php");
+                header("Location: /task-manager-v1/views/dashboard_jefe.php");
             } else {
-                header("Location: views/dashboard_usuario.php");
+                header("Location: /task-manager-v1/views/dashboard_usuario.php");
             }
             exit;
         } else {
@@ -42,9 +42,8 @@ class AuthController {
 
     public function logout() {
         session_destroy();
-        header("Location: views/login.php");
+        header("Location: ../index.php");
         exit;
     }
-
 }
 ?>

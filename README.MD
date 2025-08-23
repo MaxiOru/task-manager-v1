@@ -23,10 +23,9 @@ Una aplicación web para gestionar tareas pendientes de usuarios, desarrollada e
 ## 📁 Estructura del proyecto
 
 ```
-task-manager_v1/
+task-manager-v1/
 ├── index.php                # Punto de entrada principal
 ├── logout.php               # Cerrar sesión
-├── register.php             # Registro de usuarios
 ├── approve_user.php         # Aprobación de usuarios
 ├── reject_user.php          # Rechazo de usuarios
 ├── config/
@@ -36,10 +35,10 @@ task-manager_v1/
 │   └── TaskController.php   # Control de tareas
 ├── models/
 │   ├── User.php             # Modelo de usuarios
-│   └── Task.php             # Modelo de tareas
 ├── views/
 │   ├── dashboard_jefe.php   # Panel del jefe
 │   ├── dashboard_usuario.php # Panel del usuario
+|   ├── register.php             # Registro de usuarios
 ├── public/
 │   └── css/
 │       └── style.css        # Estilos CSS
@@ -59,11 +58,11 @@ task-manager_v1/
 
 1. **Descargar/Clonar el proyecto**
    ```bash
-   git clone https://github.com/tu-usuario/task-manager_v1.git
+   git clone https://github.com/MaxiOru/task-manager-v1.git
    ```
 
 2. **Mover a XAMPP**
-   - Copiar la carpeta `task-manager_v1` a `C:/xampp/htdocs/`
+   - Copiar la carpeta `task-manager-v1` a `C:/xampp/htdocs/`
 
 3. **Iniciar servicios XAMPP**
    - Abrir el Panel de Control de XAMPP
@@ -84,7 +83,7 @@ task-manager_v1/
    ```
 
 6. **Acceder a la aplicación**
-   - Abrir navegador en: http://localhost/task-manager_v1
+   - Abrir navegador en: http://localhost/task-manager-v1/index.php
 
 ## 🔑 Credenciales de prueba
 
@@ -103,7 +102,7 @@ El sistema incluye usuarios de demostración ya configurados:
 ## 📖 Guía de uso
 
 ### Para usuarios normales:
-1. **Registrarse** en http://localhost/task-manager_v1/register.php
+1. **Registrarse** en http://localhost/task-manager-v1/register.php
 2. **Esperar aprobación** del jefe
 3. **Iniciar sesión** con las credenciales
 4. **Crear tareas** desde el dashboard o desde "Crear nueva tarea"

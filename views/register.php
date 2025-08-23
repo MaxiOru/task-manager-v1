@@ -4,9 +4,9 @@ session_start();
 // Si ya está logueado, redirigir
 if (isset($_SESSION['user_id'])) {
     if ($_SESSION['user_role'] === 'jefe') {
-        header("Location: views/dashboard_jefe.php");
+        header("Location: dashboard_jefe.php");
     } else {
-        header("Location: views/dashboard_usuario.php");
+        header("Location: dashboard_usuario.php");
     }
     exit;
 }

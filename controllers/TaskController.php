@@ -1,35 +1,28 @@
 <?php
-require_once '../config/database.php';
+require_once '../models/Task.php';
 
 class TaskController {
-    private $conn;
+    private $taskModel;
 
     public function __construct() {
-        $db = new Database();
-        $this->conn = $db->connect();
+        $this->taskModel = new Task();
     }
 
     public function getTasksByUser($user_id) {
-        $stmt = $this->conn->prepare("SELECT * FROM tasks WHERE user_id = :user_id ORDER BY due_date ASC");
-        $stmt->execute(['user_id' => $user_id]);
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $this->taskModel->getByUser($user_id);
     }
 
     public function createTask($user_id, $title, $description, $due_date) {
-        $stmt = $this->conn->prepare("INSERT INTO tasks (user_id, title, description, due_date) VALUES (:user_id, :title, :description, :due_date)");
-        $stmt->execute([
-            'user_id' => $user_id,
-            'title' => $title,
-            'description' => $description,
-            'due_date' => $due_date
-        ]);
+        return $this->taskModel->create($user_id, $title, $description, $due_date);
     }
 
-    public function updateStatus($task_id, $status) {
-        $stmt = $this->conn->prepare("UPDATE tasks SET status = :status WHERE id = :id");
-        $stmt->execute([
-            'status' => $status,
-            'id' => $task_id
-        ]);
+    public function updateStatus($task_id, $status, $user_id) {
+        // Validar que la tarea pertenece al usuario
+        $task = $this->taskModel->getById($task_id);
+        if ($task && $task['user_id'] == $user_id) {
+            return $this->taskModel->updateStatus($task_id, $status);
+        }
+        return false;
     }
 }
+?>

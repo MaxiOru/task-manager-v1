@@ -4,7 +4,7 @@ require_once '../config/database.php';
 
 // Verificación de sesión y rol
 if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'jefe') {
-    header("Location: login.php");
+    header("Location: ../index.php");
     exit;
 }
 
