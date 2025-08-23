@@ -4,166 +4,437 @@
     margin: 0;
     padding: 0;
 }
+
 body {
     font-family: Arial, sans-serif;
     background: #f8f9fa;
     color: #333;
     margin: 20px;
+    line-height: 1.6;
 }
+
 h2, h3 {
-    margin-top: 40px;
+    margin-top: 20px;
     margin-bottom: 20px;
-    color: #218838; /* Verde principal */
+    color: #218838;
 }
+
+h2 {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
 a {
     color: #218838;
     text-decoration: none;
+    transition: color 0.2s ease;
 }
+
 a:hover {
     text-decoration: underline;
     color: #155724;
 }
 
+p {
+    text-align: center;
+    margin: 15px 0;
+}
+
 /* ===== CONTENEDORES ===== */
 .container {
-    max-width: 900px;
+    max-width: 1200px;
     margin: 40px auto;
     background: #fff;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0,0,0,0.08);
     padding: 30px;
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Centra el contenido interno */
 }
 
-.container form,
-.container h2,
-.container h3 {
-    width: 100%;
-    max-width: 500px;
-}
 .container-small {
-    max-width: 400px;
-}
-.section {
-    padding: 20px;
-    margin-bottom: 30px;
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.06);
+    max-width: 450px;
 }
 
 /* ===== NAVEGACIÓN ===== */
 .nav {
     padding: 15px 0;
-    margin-bottom: 20px;
-    border-bottom: 1px solid #eee;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #e9ecef;
+    text-align: center;
 }
+
 .nav a {
-    margin-right: 15px;
+    margin: 0 15px;
     font-weight: bold;
+    color: #218838;
+    font-size: 16px;
+}
+
+/* ===== FORMULARIOS DE LOGIN Y REGISTRO ===== */
+form input[type="text"],
+form input[type="password"],
+form input[type="date"],
+form textarea,
+form select {
+    width: 100%;
+    padding: 12px 15px;
+    margin: 8px 0;
+    border: 2px solid #c3e6cb;
+    border-radius: 8px;
+    font-size: 16px;
+    background: #fff;
+    transition: all 0.2s ease;
+}
+
+form input:focus,
+form textarea:focus,
+form select:focus {
+    outline: none;
+    border-color: #218838;
+    box-shadow: 0 0 0 3px rgba(33, 136, 56, 0.1);
+    transform: translateY(-2px);
+}
+
+form button {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    background: linear-gradient(135deg, #218838 0%, #155724 100%);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(33,136,56,0.3);
+}
+
+form button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(33,136,56,0.4);
+    background: linear-gradient(135deg, #155724 0%, #218838 100%);
+}
+
+/* ===== SECCIÓN DE TAREAS EXISTENTES ===== */
+.tasks-section {
+    margin-bottom: 60px;
+}
+
+.tasks-section h3 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 24px;
     color: #218838;
 }
 
-/* ===== FORMULARIOS ===== */
-form {
-    margin-bottom: 20px;
-}
-form input,
-form textarea,
-form select,
-form button {
-    width: 100%;
-    max-width: 400px;
-    margin-bottom: 15px;
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 16px;
-}
-form textarea {
-    resize: vertical;
-    min-height: 80px;
-}
-form label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-    color: #333;
-}
-.form-group {
-    margin-bottom: 20px;
-}
-button {
-    background: #218838;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    padding: 8px 16px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background 0.2s;
-}
-button:hover {
-    background: #155724;
+.no-tasks {
+    text-align: center;
+    color: #666;
+    font-size: 18px;
+    padding: 40px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 2px dashed #dee2e6;
 }
 
-/* ===== TARJETAS Y LISTAS ===== */
+/* ===== LISTA DE TAREAS ===== */
 .task-list {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center; /* Centra las tarjetas */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin-bottom: 40px;
 }
 
 .card {
-    border: 1px solid #c3e6cb;
-    padding: 16px;
-    border-radius: 8px;
-    background-color: #e9fbe5;
-    min-width: 250px;
-    max-width: 300px;
-    flex: 1 1 250px;
-    box-shadow: 0 2px 4px rgba(33,136,56,0.08);
+    border: 2px solid #c3e6cb;
+    padding: 20px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #e9fbe5 0%, #f0f9ff 100%);
+    box-shadow: 0 4px 12px rgba(33,136,56,0.1);
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    min-height: 260px; /* Ajusta según lo que necesites */
+    min-height: 280px;
+    transition: all 0.3s ease;
 }
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(33,136,56,0.15);
+    border-color: #218838;
+}
+
+.card-content {
+    flex-grow: 1;
+    margin-bottom: 20px;
+}
+
 .card-title {
     font-weight: bold;
-    margin-bottom: 10px;
+    font-size: 18px;
+    margin-bottom: 12px;
+    color: #155724;
+    border-bottom: 2px solid #c3e6cb;
+    padding-bottom: 8px;
 }
 
 .card-desc {
-    margin-bottom: 10px;
+    margin-bottom: 12px;
     color: #333;
-    font-size: 0.98em;
+    font-size: 14px;
+    line-height: 1.5;
+    min-height: 40px;
 }
 
 .card-date {
-    margin-bottom: 15px;
+    margin-bottom: 8px;
     color: #218838;
-    font-size: 0.95em;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.card-status {
+    margin-bottom: 15px;
+    color: #666;
+    font-size: 14px;
+    font-weight: 500;
 }
 
 .card-form {
     margin-top: auto;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
+    padding-top: 15px;
+    border-top: 1px solid #c3e6cb;
 }
-ul {
-    list-style: none;
-    padding: 0;
+
+.card-form select {
+    padding: 8px;
+    border: 1px solid #c3e6cb;
+    border-radius: 6px;
+    background: #fff;
+    font-size: 14px;
 }
-li {
+
+.card-form button {
+    width: 100%;
     padding: 10px;
-    background: #e9fbe5;
-    margin: 5px 0;
-    border-radius: 4px;
+    background: #218838;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    box-shadow: none;
+    margin: 0;
+}
+
+.card-form button:hover {
+    background: #155724;
+    transform: none;
+}
+
+/* ===== SECCIÓN CREAR NUEVA TAREA ===== */
+.section {
+    margin-bottom: 30px;
+}
+
+.section-highlight {
+    background: linear-gradient(135deg, #e6ffe6 0%, #d4f4dd 100%);
+    border: 3px solid #218838;
+    border-radius: 15px;
+    padding: 40px;
+    box-shadow: 0 8px 25px rgba(33,136,56,0.15);
+    margin-top: 40px;
+}
+
+.section-title {
+    text-align: center;
+    color: #155724;
+    font-size: 26px;
+    margin-bottom: 30px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.new-task-form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* ===== FORMULARIOS AVANZADOS ===== */
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #155724;
+    font-size: 16px;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #c3e6cb;
+    border-radius: 8px;
+    font-size: 16px;
+    background: #fff;
+    transition: all 0.2s ease;
+    margin: 0;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #218838;
+    box-shadow: 0 0 0 3px rgba(33, 136, 56, 0.1);
+    transform: translateY(-2px);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+    font-family: Arial, sans-serif;
+}
+
+.btn-create {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(135deg, #218838 0%, #155724 100%);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(33,136,56,0.3);
+    margin: 0;
+}
+
+.btn-create:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(33,136,56,0.4);
+    background: linear-gradient(135deg, #155724 0%, #218838 100%);
+}
+
+.btn-create:active {
+    transform: translateY(-1px);
+}
+
+/* ===== ESTADOS Y MENSAJES ===== */
+.status {
+    padding: 4px 12px;
+    border-radius: 15px;
+    font-size: 0.85em;
+    font-weight: bold;
+    display: inline-block;
+}
+
+.status-pendiente {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.status-progreso {
+    background: #c3e6cb;
+    color: #218884;
+}
+
+.status-completada {
+    background: #d4edda;
+    color: #155724; 
+}
+
+.message {
+    padding: 12px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    font-size: 1em;
+    border-left: 4px solid;
+}
+
+.success {
+    background-color: #d4edda;
+    color: #155724;
+    border-color: #c3e6cb;
+}
+
+.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border-color: #f5c6cb;
+}
+.message-center {
+    text-align: center;
+    margin: 20px auto;
+    font-size: 1.1em;
+    color: #218838;
+}
+.message-center.error {
+    color: #dc3545;
+}
+
+/* ===== FECHAS ===== */
+.date-overdue {
+    color: #dc3545;
+    font-weight: bold;
+}
+
+.date-today {
+    color: #fd7e14;
+    font-weight: bold;
+}
+
+.date-future {
+    color: #218838;
+}
+
+/* ===== ESTADÍSTICAS ===== */
+.stats {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+.stat-card {
+    flex: 1;
+    min-width: 150px;
+    padding: 20px;
+    background: linear-gradient(135deg, #e9fbe5 0%, #d4edda 100%);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(33,136,56,0.06);
+    text-align: center;
+    transition: transform 0.2s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-2px);
+}
+
+.stat-number {
+    font-size: 2em;
+    font-weight: bold;
+    color: #218838;
+}
+
+.stat-label {
+    color: #666;
+    text-transform: uppercase;
+    font-size: 0.9em;
+    margin-top: 5px;
 }
 
 /* ===== TABLAS ===== */
@@ -175,103 +446,132 @@ table {
     border-radius: 8px;
     overflow: hidden;
 }
+
 th, td {
     padding: 12px;
     border: 1px solid #c3e6cb;
     text-align: left;
 }
+
 th {
     background: #218838;
     color: #fff;
+    font-weight: bold;
 }
+
+tr {
+    transition: background-color 0.2s ease;
+}
+
 tr:nth-child(even) {
-    background: #e9fbe5;
+    background: #f8f9fa;
 }
+
 tr:hover {
-    background: #d4edda;
+    background: #e3f2fd;
 }
 
-/* ===== ESTADOS Y MENSAJES ===== */
-.status {
-    padding: 4px 12px;
-    border-radius: 15px;
-    font-size: 0.85em;
-    font-weight: bold;
-    display: inline-block;
-}
-.status-pendiente {
-    background: #fff3cd;
-    color: #856404;
-}
-.status-progreso {
-    background: #c3e6cb;
-    color: #218838;
-}
-.status-completada {
-    background: #d4edda;
-    color: #155724;
-}
-.message {
-    padding: 12px;
-    margin-bottom: 20px;
-    border-radius: 5px;
-    font-size: 1em;
-}
-.success {
-    background-color: #d4edda;
-    color: #155724;
-    border: 1px solid #c3e6cb;
-}
-.error {
-    background-color: #f8d7da;
-    color: #721c24;
-    border: 1px solid #f5c6cb;
+/* ===== LISTAS ESPECIALES ===== */
+ul {
+    list-style: none;
+    padding: 0;
 }
 
-/* ===== FECHAS ===== */
-.date-overdue {
-    color: #dc3545;
-    font-weight: bold;
-}
-.date-today {
-    color: #fd7e14;
-    font-weight: bold;
-}
-.date-future {
-    color: #218838;
-}
-
-/* ===== UTILIDADES ===== */
-.center {
-    text-align: center;
-}
-.bold {
-    font-weight: bold;
-}
-
-/* ===== ESTADÍSTICAS ===== */
-.stats {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-    margin-bottom: 30px;
-}
-.stat-card {
-    flex: 1;
-    min-width: 150px;
-    padding: 20px;
+li {
+    padding: 10px;
     background: #e9fbe5;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(33,136,56,0.06);
-    text-align: center;
+    margin: 5px 0;
+    border-radius: 4px;
+    border-left: 4px solid #218838;
 }
-.stat-number {
-    font-size: 2em;
-    font-weight: bold;
-    color: #218838;
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+    body {
+        margin: 10px;
+    }
+    
+    .container {
+        margin: 20px auto;
+        padding: 20px;
+    }
+    
+    .task-list {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .section-highlight {
+        padding: 25px;
+        margin-top: 30px;
+    }
+    
+    .section-title {
+        font-size: 22px;
+    }
+    
+    .nav a {
+        display: block;
+        margin: 5px 0;
+    }
+    
+    .stats {
+        flex-direction: column;
+    }
+    
+    table {
+        font-size: 0.9em;
+    }
+    
+    th, td {
+        padding: 8px 6px;
+    }
 }
-.stat-label {
-    color: #666;
-    text-transform: uppercase;
-    font-size: 0.9em;
+
+@media (max-width: 480px) {
+    .container {
+        padding: 15px;
+    }
+    
+    .section-highlight {
+        padding: 20px;
+    }
+    
+    .section-title {
+        font-size: 20px;
+    }
+    
+    form input,
+    form textarea,
+    form select,
+    form button,
+    .form-group input,
+    .form-group textarea,
+    .form-group select,
+    .btn-create {
+        font-size: 14px;
+        padding: 10px;
+    }
+    
+    .btn-create {
+        padding: 12px;
+        font-size: 16px;
+    }
+    
+    .card {
+        padding: 15px;
+        min-height: 250px;
+    }
+    
+    .card-title {
+        font-size: 16px;
+    }
+    
+    .stat-card {
+        padding: 15px;
+    }
+    
+    .stat-number {
+        font-size: 1.5em;
+    }
 }

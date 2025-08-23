@@ -12,15 +12,19 @@ if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'jefe') {
 $db = new Database();
 $conn = $db->connect();
 
-// Usuarios pendientes de aprobación
-$stmtPendientes = $conn->query("SELECT * FROM users WHERE role = 'normal' AND approved = 0");
+// Usuarios pendientes de aprobación (no rechazados)
+$stmtPendientes = $conn->query("SELECT * FROM users WHERE role = 'normal' AND approved = 0 AND rejected = 0");
 $pendientes = $stmtPendientes->fetchAll(PDO::FETCH_ASSOC);
 
 // Usuarios ya aprobados
 $stmtAprobados = $conn->query("SELECT * FROM users WHERE role = 'normal' AND approved = 1");
 $aprobados = $stmtAprobados->fetchAll(PDO::FETCH_ASSOC);
 
-// NUEVA FUNCIONALIDAD: Obtener todas las tareas con información del usuario
+// Usuarios rechazados
+$stmtRechazados = $conn->query("SELECT * FROM users WHERE role = 'normal' AND rejected = 1");
+$rechazados = $stmtRechazados->fetchAll(PDO::FETCH_ASSOC);
+
+// Todas las tareas con información del usuario
 $stmtTasks = $conn->query("
     SELECT t.*, u.username 
     FROM tasks t 
@@ -49,7 +53,6 @@ foreach ($allTasks as $task) {
     <meta charset="UTF-8">
     <title>Panel del Jefe - Administración</title>
     <link rel="stylesheet" href="../public/css/style.css">
-
 </head>
 <body>
     <div class="container">
@@ -146,11 +149,15 @@ foreach ($allTasks as $task) {
                     <?php foreach ($pendientes as $user): ?>
                         <tr>
                             <td><?= htmlspecialchars($user['username']) ?></td>
-                            <td>Pendiente</td>
+                            <td><?= isset($user['created_at']) ? date('d/m/Y H:i', strtotime($user['created_at'])) : 'Sin fecha' ?></td>
                             <td>
-                                <form method="POST" action="../approve_user.php">
+                                <form method="POST" action="../approve_user.php" style="display:inline;">
                                     <input type="hidden" name="user_id" value="<?= $user['id'] ?>">
                                     <button type="submit">Aprobar</button>
+                                </form>
+                                <form method="POST" action="../reject_user.php" style="display:inline;">
+                                    <input type="hidden" name="user_id" value="<?= $user['id'] ?>">
+                                    <button type="submit" style="background:#dc3545;color:#fff;">Rechazar</button>
                                 </form>
                             </td>
                         </tr>
@@ -169,7 +176,6 @@ foreach ($allTasks as $task) {
                     <?php foreach ($aprobados as $user): ?>
                         <li>
                             <strong><?= htmlspecialchars($user['username']) ?></strong>
-                            <span class="status status-completada">● Activo</span>
                         </li>
                     <?php endforeach; ?>
                 </ul>
@@ -177,8 +183,22 @@ foreach ($allTasks as $task) {
                 <p>No hay usuarios aprobados aún.</p>
             <?php endif; ?>
         </div>
+
+        <!-- Usuarios rechazados -->
+        <div class="section">
+            <h3>❌ Usuarios rechazados</h3>
+            <?php if (count($rechazados) > 0): ?>
+                <ul>
+                    <?php foreach ($rechazados as $user): ?>
+                        <li>
+                            <strong><?= htmlspecialchars($user['username']) ?></strong>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            <?php else: ?>
+                <p>No hay usuarios rechazados aún.</p>
+            <?php endif; ?>
+        </div>
     </div>
 </body>
-
 </html>
-

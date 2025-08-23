@@ -37,10 +37,8 @@ task-manager_v1/
 │   ├── User.php             # Modelo de usuarios
 │   └── Task.php             # Modelo de tareas
 ├── views/
-│   ├── login.php            # Vista de inicio de sesión
 │   ├── dashboard_jefe.php   # Panel del jefe
 │   ├── dashboard_usuario.php # Panel del usuario
-│   └── create_task.php      # Crear nueva tarea
 ├── public/
 │   └── css/
 │       └── style.css        # Estilos CSS
@@ -179,22 +177,9 @@ El sistema incluye usuarios de demostración ya configurados:
 
 1. **Registro** → Usuario se registra (approved = 0)
 2. **Aprobación** → Jefe aprueba usuario (approved = 1)
-3. **Login** → Usuario inicia sesión
+3. **Index** → Usuario inicia sesión
 4. **Dashboard** → Se redirige según rol (jefe/usuario)
 5. **Gestión** → Crear/actualizar tareas o aprobar usuarios
-
-## 📝 Posibles mejoras futuras
-
-- [ ] Sistema de asignación de tareas entre usuarios
-- [ ] Filtros avanzados y búsqueda de tareas
-- [ ] Notificaciones por email
-- [ ] API REST para integración
-- [ ] Frontend moderno (React/Vue)
-- [ ] Sistema de comentarios en tareas
-- [ ] Dashboard con gráficos y estadísticas
-- [ ] Exportación de reportes
-- [ ] Recordatorios automáticos
-- [ ] Categorías de tareas
 
 ## 🚨 Solución de problemas comunes
 
@@ -225,5 +210,3 @@ Este proyecto está desarrollado como tarea técnica para evaluación de habilid
 - **Compatibilidad**: XAMPP, Apache, MySQL, PHP 7.4+
 
 ---
-
-**¿Necesitas ayuda?** Revisa la sección de solución de problemas o verifica que XAMPP esté funcionando correctamente.

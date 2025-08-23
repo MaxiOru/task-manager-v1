@@ -27,7 +27,7 @@ class AuthController {
             // Guardar datos en sesión
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['user_role'] = $user['role']; // 👈 importante para saber el rol
-
+            $_SESSION['username'] = $user['username'];
             // Redirigir según el rol
             if ($user['role'] === 'jefe') {
                 header("Location: views/dashboard_jefe.php");

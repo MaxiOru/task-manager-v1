@@ -62,13 +62,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <h2>Registro de usuario</h2>
         
         <?php if (!empty($success_message)): ?>
-            <div>
+            <div class="message-center">
                 <?= htmlspecialchars($success_message) ?>
             </div>
         <?php endif; ?>
-        
+
         <?php if (!empty($error_message)): ?>
-            <div >
+            <div class="message-center error">
                 <?= htmlspecialchars($error_message) ?>
             </div>
         <?php endif; ?>
