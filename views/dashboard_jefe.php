@@ -1,30 +1,31 @@
 <?php
+// Iniciar sesión
 session_start();
 require_once '../config/database.php';
 
-// Verificación de sesión y rol
+// Verificar que el usuario esté logueado y tenga rol de jefe
 if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'jefe') {
     header("Location: ../index.php");
     exit;
 }
 
-// Conexión a la base de datos
+// Establecer conexión a la base de datos
 $db = new Database();
 $conn = $db->connect();
 
-// Usuarios pendientes de aprobación (no rechazados)
+// Obtener usuarios normales pendientes de aprobación (no rechazados)
 $stmtPendientes = $conn->query("SELECT * FROM users WHERE role = 'normal' AND approved = 0 AND rejected = 0");
 $pendientes = $stmtPendientes->fetchAll(PDO::FETCH_ASSOC);
 
-// Usuarios ya aprobados
+// Obtener usuarios normales ya aprobados
 $stmtAprobados = $conn->query("SELECT * FROM users WHERE role = 'normal' AND approved = 1");
 $aprobados = $stmtAprobados->fetchAll(PDO::FETCH_ASSOC);
 
-// Usuarios rechazados
+// Obtener usuarios normales rechazados
 $stmtRechazados = $conn->query("SELECT * FROM users WHERE role = 'normal' AND rejected = 1");
 $rechazados = $stmtRechazados->fetchAll(PDO::FETCH_ASSOC);
 
-// Todas las tareas con información del usuario
+// Obtener todas las tareas del sistema con información del usuario asignado
 $stmtTasks = $conn->query("
     SELECT t.*, u.username 
     FROM tasks t 
@@ -33,13 +34,14 @@ $stmtTasks = $conn->query("
 ");
 $allTasks = $stmtTasks->fetchAll(PDO::FETCH_ASSOC);
 
-// Contar tareas por estado
+// Inicializar contadores para estadísticas de tareas
 $taskStats = [
     'pendiente' => 0,
     'en progreso' => 0,
     'completada' => 0
 ];
 
+// Contar tareas por cada estado
 foreach ($allTasks as $task) {
     if (isset($taskStats[$task['status']])) {
         $taskStats[$task['status']]++;
@@ -56,18 +58,20 @@ foreach ($allTasks as $task) {
 </head>
 <body>
     <div class="container">
+        <!-- Barra de navegación -->
         <div class="nav">
-            <a href="dashboard_jefe.php">🔄 Actualizar</a> |
+            <a href="dashboard_jefe.php">📄 Actualizar</a> |
             <a href="../logout.php">🚪 Cerrar sesión</a>
         </div>
 
         <h2>Panel de Administración - Bienvenido, Jefe</h2>
 
+        <!-- Mostrar mensaje de éxito si se aprobó un usuario -->
         <?php if (isset($_GET['aprobado']) && $_GET['aprobado'] == 1): ?>
             <div class="message success">✅ Usuario aprobado correctamente.</div>
         <?php endif; ?>
 
-        <!-- Estadísticas de tareas -->
+        <!-- Sección de estadísticas de tareas -->
         <div class="stats">
             <div class="stat-card">
                 <div class="stat-number"><?= $taskStats['pendiente'] ?></div>
@@ -87,7 +91,7 @@ foreach ($allTasks as $task) {
             </div>
         </div>
 
-        <!-- Todas las tareas -->
+        <!-- Tabla con todas las tareas del sistema -->
         <div class="section">
             <h3>📋 Todas las Tareas del Sistema</h3>
             <?php if (count($allTasks) > 0): ?>
@@ -101,6 +105,7 @@ foreach ($allTasks as $task) {
                     </tr>
                     <?php foreach ($allTasks as $task): ?>
                         <?php
+                        // Determinar el estilo de fecha según si está vencida, es hoy o futura
                         $today = date('Y-m-d');
                         $dueDate = $task['due_date'];
                         $dateClass = 'date-future';
@@ -114,14 +119,17 @@ foreach ($allTasks as $task) {
                         <tr>
                             <td><strong><?= htmlspecialchars($task['username']) ?></strong></td>
                             <td><?= htmlspecialchars($task['title']) ?></td>
+                            <!-- Limitar descripción a 50 caracteres -->
                             <td><?= htmlspecialchars(substr($task['description'], 0, 50)) ?><?= strlen($task['description']) > 50 ? '...' : '' ?></td>
                             <td>
+                                <!-- Aplicar clase CSS según el estado de la tarea -->
                                 <span class="status status-<?= str_replace(' ', '-', $task['status']) == 'en-progreso' ? 'progreso' : str_replace(' ', '-', $task['status']) ?>">
                                     <?= ucfirst($task['status']) ?>
                                 </span>
                             </td>
                             <td class="<?= $dateClass ?>">
                                 <?= $formattedDate ?>
+                                <!-- Mostrar etiqueta adicional para fechas especiales -->
                                 <?php if ($dueDate < $today): ?>
                                     (Vencida)
                                 <?php elseif ($dueDate == $today): ?>
@@ -136,7 +144,7 @@ foreach ($allTasks as $task) {
             <?php endif; ?>
         </div>
 
-        <!-- Usuarios pendientes de aprobación -->
+        <!-- Sección de usuarios pendientes de aprobación -->
         <div class="section">
             <h3>👥 Usuarios pendientes de aprobación</h3>
             <?php if (count($pendientes) > 0): ?>
@@ -151,10 +159,12 @@ foreach ($allTasks as $task) {
                             <td><?= htmlspecialchars($user['username']) ?></td>
                             <td><?= isset($user['created_at']) ? date('d/m/Y H:i', strtotime($user['created_at'])) : 'Sin fecha' ?></td>
                             <td>
+                                <!-- Formulario para aprobar usuario -->
                                 <form method="POST" action="../approve_user.php" style="display:inline;">
                                     <input type="hidden" name="user_id" value="<?= $user['id'] ?>">
                                     <button type="submit">Aprobar</button>
                                 </form>
+                                <!-- Formulario para rechazar usuario -->
                                 <form method="POST" action="../reject_user.php" style="display:inline;">
                                     <input type="hidden" name="user_id" value="<?= $user['id'] ?>">
                                     <button type="submit" style="background:#dc3545;color:#fff;">Rechazar</button>
@@ -168,7 +178,7 @@ foreach ($allTasks as $task) {
             <?php endif; ?>
         </div>
 
-        <!-- Usuarios aprobados -->
+        <!-- Lista de usuarios ya aprobados -->
         <div class="section">
             <h3>✅ Usuarios aprobados</h3>
             <?php if (count($aprobados) > 0): ?>
@@ -184,7 +194,7 @@ foreach ($allTasks as $task) {
             <?php endif; ?>
         </div>
 
-        <!-- Usuarios rechazados -->
+        <!-- Lista de usuarios rechazados -->
         <div class="section">
             <h3>❌ Usuarios rechazados</h3>
             <?php if (count($rechazados) > 0): ?>

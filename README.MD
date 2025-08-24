@@ -34,7 +34,7 @@ task-manager-v1/
 │   ├── AuthController.php   # Control de autenticación
 │   └── TaskController.php   # Control de tareas
 ├── models/
-│   ├── User.php             # Modelo de usuarios
+│   ├── Task.php             # Modelo de usuarios
 ├── views/
 │   ├── dashboard_jefe.php   # Panel del jefe
 │   ├── dashboard_usuario.php # Panel del usuario
@@ -42,7 +42,7 @@ task-manager-v1/
 ├── public/
 │   └── css/
 │       └── style.css        # Estilos CSS
-├── dump.sql                 # Base de datos completa
+├── dumb.sql                 # Base de datos completa
 └── README.md               # Este archivo
 ```
 
