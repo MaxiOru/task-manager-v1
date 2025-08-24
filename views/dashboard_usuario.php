@@ -89,10 +89,10 @@ $tasks = $taskController->getTasksByUser($_SESSION['user_id']);
                     <label for="title">Título</label>
                     <input type="text" id="title" name="title" placeholder="Título de la tarea" required>
                 </div>
-                <!-- Campo descripción (opcional) -->
+                <!-- Campo descripción -->
                 <div class="form-group">
                     <label for="description">Descripción</label>
-                    <textarea id="description" name="description" placeholder="Descripción de la tarea"></textarea>
+                    <textarea id="description" name="description" placeholder="Descripción de la tarea" requiered></textarea>
                 </div>
                 <!-- Campo fecha de vencimiento (obligatorio) -->
                 <div class="form-group">

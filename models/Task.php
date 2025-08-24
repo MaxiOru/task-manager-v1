@@ -31,7 +31,7 @@ class Task {
     public function create($user_id, $title, $description, $due_date) {
         $stmt = $this->conn->prepare(
             "INSERT INTO {$this->table} (user_id, title, description, due_date, status) 
-             VALUES (:user_id, :title, :description, :due_date, 'pendiente')"
+            VALUES (:user_id, :title, :description, :due_date, 'pendiente')"
         );
         return $stmt->execute([
             'user_id' => $user_id,
